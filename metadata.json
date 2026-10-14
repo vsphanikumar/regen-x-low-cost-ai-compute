@@ -1,0 +1,6 @@
+{
+  "name": "REGEN-X: Spatial-Temporal Compute Arbitrage Network",
+  "description": "Autonomous clean energy compute arbitrage platform orchestrating batch AI workloads during renewable surges with cryptographic Green Compute Passports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

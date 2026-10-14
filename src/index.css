@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #0b0f19;
+    color: #f8fafc;
+    overflow-x: hidden;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom Tactical Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* =========================================================================
+   Grid Node Dynamic Arbitrage Pulse CSS Animations
+   Faster pulse frequency corresponds to deeper negative pricing (arbitrage surges)
+   ========================================================================= */
+@keyframes gridNodePulseWave {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.95;
+    stroke-width: 2.6px;
+  }
+  50% {
+    opacity: 0.45;
+    stroke-width: 1.8px;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+    stroke-width: 0.3px;
+  }
+}
+
+@keyframes gridNodeHighIntensityWave {
+  0% {
+    transform: scale(0.85);
+    opacity: 1;
+    stroke-width: 3.5px;
+  }
+  40% {
+    opacity: 0.8;
+    stroke-width: 2.2px;
+  }
+  100% {
+    transform: scale(3.4);
+    opacity: 0;
+    stroke-width: 0.2px;
+  }
+}
+
+@keyframes gridNodeCoreBeacon {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  50% {
+    transform: scale(1.22);
+    opacity: 1;
+    filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 16px currentColor);
+  }
+}
+
+@keyframes highIntensityRadarStrobe {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.85;
+  }
+}
+
+@keyframes arbitrageBadgeGlow {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px rgba(244, 63, 94, 0.4));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.9));
+  }
+}
+
+.animate-arbitrage-badge {
+  animation: arbitrageBadgeGlow var(--badge-pulse-dur, 1s) ease-in-out infinite;
+}
+
+.node-wave-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-name: gridNodePulseWave;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation-iteration-count: infinite;
+}
+
+.node-high-intensity-wave {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-name: gridNodeHighIntensityWave;
+  animation-timing-function: cubic-bezier(0.15, 0.85, 0.2, 1);
+  animation-iteration-count: infinite;
+}
+
+.node-core-strobe {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-name: gridNodeCoreBeacon;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.node-radar-reticle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-name: highIntensityRadarStrobe;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* =========================================================================
+   CSS-Based Energy-Flow Animation Lines
+   ========================================================================= */
+@keyframes energyFlowForward {
+  0% {
+    stroke-dashoffset: 48;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes energyFlowFast {
+  0% {
+    stroke-dashoffset: 48;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes energyBeamGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.7)) drop-shadow(0 0 8px rgba(52, 211, 153, 0.4));
+    opacity: 0.85;
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 1)) drop-shadow(0 0 18px rgba(52, 211, 153, 0.85));
+    opacity: 1;
+  }
+}
+
+@keyframes energyIntakeBurst {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 16px 4px rgba(52, 211, 153, 0.75);
+  }
+}
+
+.energy-flow-active-line {
+  stroke-dasharray: 8 6;
+  animation: energyFlowForward 0.8s linear infinite;
+}
+
+.energy-flow-fast-line {
+  stroke-dasharray: 10 5;
+  animation: energyFlowFast 0.45s linear infinite;
+}
+
+.energy-flow-laser {
+  animation: energyBeamGlow 1.4s ease-in-out infinite;
+}
+
+.energy-intake-pulse {
+  animation: energyIntakeBurst 1s ease-in-out infinite;
+}
+
+/* ========================================================================= */
+/* LIVE ARBITRATION PULSE KEYFRAME ANIMATIONS                                */
+/* ========================================================================= */
+@keyframes arbitrationFlowFast {
+  from {
+    stroke-dashoffset: 48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes arbitrationFlowReverse {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 48;
+  }
+}
+
+@keyframes arbitrationPulseExpand {
+  0% {
+    r: 6;
+    opacity: 0.95;
+    stroke-width: 2.5;
+  }
+  60% {
+    opacity: 0.5;
+    stroke-width: 1.8;
+  }
+  100% {
+    r: 42;
+    opacity: 0;
+    stroke-width: 0.5;
+  }
+}
+
+@keyframes packetHaloGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.9)) drop-shadow(0 0 10px rgba(16, 185, 129, 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 1)) drop-shadow(0 0 18px rgba(52, 211, 153, 0.95));
+  }
+}
+
+.arbitration-pulse-conduit {
+  stroke-dasharray: 8 5;
+  animation: arbitrationFlowFast 0.65s linear infinite;
+}
+
+.arbitration-pulse-reverse {
+  stroke-dasharray: 8 5;
+  animation: arbitrationFlowReverse 0.75s linear infinite;
+}
+
+.arbitration-packet-glow {
+  animation: packetHaloGlow 1.2s ease-in-out infinite;
+}
