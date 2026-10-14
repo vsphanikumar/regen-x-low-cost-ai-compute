@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # REGEN-X
 
 ## Turn Wasted Renewable Energy Into Low-Cost AI Compute
@@ -143,3 +144,7 @@ REGEN-X is focused on reducing marginal carbon from flexible workloads by shifti
 ## Disclaimer
 
 This repository is a research and demonstration project. It is not a production-grade control system for energy markets or utility operations. Do not use this code to control live generation or make operational grid decisions without appropriate validation and coordination with grid operators.
+=======
+# regen-x-low-cost-ai-compute
+Transforming surplus renewable energy into sustainability-verified AI compute through Gemini-powered orchestration.
+>>>>>>> 33feebc (Initial commit)
