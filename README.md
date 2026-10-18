@@ -15,9 +15,20 @@ REGEN-X is a demonstration platform that routes delay-tolerant AI workloads to p
 
 ---
 
+<<<<<<< HEAD
 ## The problem
 
 Many AI workloads are flexible in time and location. Grid operators periodically curtail renewable generation when supply exceeds demand, creating short windows of very low or negative prices. Enterprises currently lack a practical, auditable way to take advantage of these windows for non-urgent compute work.
+=======
+| Resource | Link | Status |
+| --- | --- | --- |
+| Live hosted prototype | [Open REGEN-X](https://regen-x-xcdniufgbq-el.a.run.app/) | Live URL confirmed by the team; the deployed version has not been matched to this checkout. |
+| Pitch deck | [Open Builder Cup deck](https://docs.google.com/presentation/d/19TZ0xXUcykzuHNxgdfya1qXANxzIlisC) | Opens in view-only mode. Reconcile claims with the checked-in implementation before judging. |
+| Demo video | [Open walkthrough video](https://drive.google.com/file/d/1AdiDb6uE5SuBMA6bSJ41GQNNd6LJHyCF) | Drive preview is visible; public playback without signing in has not been confirmed. |
+| Local walkthrough | [Read the demo script](demo/demo-script.md) | Demonstrates the current local simulation and its limitations. |
+
+The live hosted app responded when checked on **October 18, 2026**, but its visible claims and behavior differ from the current repository. Re-deploy and verify the reviewed commit before presenting the hosted URL as this source revision.
+>>>>>>> 76f4231 (docs: finalize Builder Cup repository documentation)
 
 ---
 
@@ -139,7 +150,23 @@ Notes: a Gemini API key in .env enables live GenAI orchestration; otherwise the 
 
 REGEN-X is focused on reducing marginal carbon from flexible workloads by shifting execution into periods of surplus renewable generation. The platform provides per-job estimates and an auditable trail suitable for sustainability reporting and internal verification.
 
+<<<<<<< HEAD
 ---
+=======
+```text
+.
+├── frontend/       React + TypeScript application
+├── backend/        Separate Python/FastAPI prototype
+├── docs/           Product, implementation, audit, and cleanup notes
+├── architecture/   Current-state SVG diagrams
+├── screenshots/    Captures of the local app
+├── demo/           Walkthrough script and demo resources
+├── pitch-deck/     Pitch deck links and retained source asset
+├── scripts/        Local maintenance scripts
+├── server.ts       Express API and local app server
+└── README.md       Setup, project summary, and submission links
+```
+>>>>>>> 76f4231 (docs: finalize Builder Cup repository documentation)
 
 ## Disclaimer
 
