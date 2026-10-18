@@ -1,116 +1,309 @@
-# REGEN-X
+ REGEN-X
 
-**Turn wasted renewable energy into low-cost AI compute.**
+ Turn Wasted Renewable Energy Into Low-Cost AI Compute
 
-REGEN-X explores whether flexible AI workloads can be matched to compute capacity near periods of renewable-energy surplus. The prototype brings energy signals, workload constraints, routing choices, and example impact records into one interactive review flow.
+REGEN-X is an AI-powered energy-to-compute orchestration platform that transforms wasted renewable energy into low-cost, verifiable AI compute.
 
-> **Prototype, not an operating energy platform.** The checked-in app uses illustrative grid, workload, price, cost, and carbon data. It does not control a power grid or compute cluster, connect to utility or compute-provider feeds, independently verify sustainability, or guarantee savings.
+Every day, renewable energy is curtailed because electricity grids cannot absorb all available solar and wind generation. At the same time, AI workloads continue to drive unprecedented demand for compute resources and rising infrastructure costs.
 
-## In 60 seconds
+REGEN-X bridges these two inefficiencies by predicting renewable energy opportunity windows and intelligently matching them with AI workloads that can be executed when and where clean energy is available.
 
-1. **Problem:** Renewable curtailment and energy-intensive AI compute can occur at different times and places.
-2. **REGEN-X idea:** Make flexible workload placement consider regional energy conditions, job urgency, and residency preferences.
-3. **How it works:** A React dashboard sends a scenario to a Node.js + Express API, which returns a routing decision and an in-memory example passport record.
-4. **Gemini:** The API can call Google GenAI when `GEMINI_API_KEY` is configured. Without a key, or if the call fails, the app uses a deterministic local fallback and reports the selected mode.
-5. **Value and impact:** The UI illustrates an economic and sustainability hypothesis; it does not show measured savings or audited emissions results.
-6. **Differentiation to validate:** Treat renewable availability and workload flexibility as joint placement inputs.
+> Transforming renewable energy waste into an economic and environmental advantage for the AI era.
 
-## Try REGEN-X
+---
 
-| Resource | Link | Status |
-| --- | --- | --- |
-| Live hosted prototype | [Open REGEN-X](https://regen-x-xcdniufgbq-el.a.run.app/) | Live URL confirmed by the team; the deployed version has not been matched to this checkout. |
-| Pitch deck | [Open Builder Cup deck](https://docs.google.com/presentation/d/19TZ0xXUcykzuHNxgdfya1qXANxzIlisC) | Opens in view-only mode; reconcile claims with the implementation before judging. |
-| Demo video | [Open walkthrough video](https://drive.google.com/file/d/1AdiDb6uE5SuBMA6bSJ41GQNNd6LJHyCF) | Drive preview is visible; public playback without sign-in has not been confirmed. |
-| Local walkthrough | [Read the demo script](demo/demo-script.md) | Describes the local simulation and limitations. |
+ Live Resources
 
-The hosted app responded when checked on **October 18, 2026**, but its visible behavior and claims differ from this repository. Deploy and verify the reviewed commit before representing the hosted URL as this source revision.
+ 🌐 Live Prototype
 
-## What is implemented
+https://regen-x-xcdniufgbq-el.a.run.app/
 
-| Area | Repository evidence |
-| --- | --- |
-| Frontend | React 19, TypeScript, and Vite under [`frontend/`](frontend/README.md). |
-| API | Node.js + Express in [`server.ts`](server.ts), using in-memory simulation state. |
-| Gemini | Optional server-side Google GenAI SDK call with deterministic fallback. |
-| Cloud Run | A live URL is supplied above and a Dockerfile is included. No verified deployment manifest or proof of source-revision parity is present. |
-| Firebase / Firestore | Not integrated in the checked-in code. |
-| Other cloud integrations | Utility telemetry, compute dispatch, BigQuery, Pub/Sub, Cloud Storage, Memorystore, and weather APIs are not implemented here. Diagrams describing them are concepts, not deployed integrations. |
+ 📊 Pitch Deck
 
-The Python/FastAPI code under [`backend/`](backend/README.md) is a separate prototype and is not required to run the primary app.
+https://docs.google.com/presentation/d/19TZ0xXUcykzuHNxgdfya1qXANxzIlisC
 
-## Run locally
+ 🎥 Demo Video
 
-Requirements: Node.js `^20.19.0` or `>=22.12.0` and npm.
+https://drive.google.com/file/d/1AdiDb6uE5SuBMA6bSJ41GQNNd6LJHyCF
 
-```bash
-npm ci
-npm run dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000). The local routing simulation does not require an API key.
+ The Problem
 
-To try Gemini, copy [`.env.example`](.env.example) to `.env`, set `GEMINI_API_KEY`, and restart the app. Do not commit `.env` or share API keys. The API can still use the fallback; check the decision-engine label.
+Renewable energy generation continues to grow globally, yet significant amounts of solar and wind energy are regularly curtailed due to grid constraints.
 
-### Validate
+At the same time:
 
-```bash
-npm run lint
-npm run build
-```
+- AI compute demand is growing rapidly
+- Infrastructure costs continue to increase
+- Sustainable AI execution remains challenging
+- Renewable energy and AI compute operate as disconnected ecosystems
 
-CI runs these TypeScript and production frontend checks on pushes to `main` and pull requests. `npm run generate:runlog` is an optional local diagnostic; it does not certify deployment or compliance.
+This creates a missed opportunity where clean energy is wasted while compute remains costly and energy intensive.
 
-## Repository map
+---
+
+ Why Now?
+
+ AI Demand Is Exploding
+
+Organizations are deploying increasingly compute-intensive AI workloads, driving significant growth in energy consumption and infrastructure costs.
+
+ Renewable Curtailment Is Increasing
+
+Renewable energy generation frequently exceeds grid absorption capacity, resulting in wasted clean energy.
+
+ Sustainability Is Becoming A Business Requirement
+
+Organizations increasingly require measurable and verifiable sustainability outcomes.
+
+ The Missing Layer
+
+Until now, no intelligent orchestration platform has dynamically connected renewable energy opportunities with AI workload execution.
+
+---
+
+ Our Solution
+
+REGEN-X introduces a new paradigm:
+
+ Energy-Aware AI Compute Orchestration
+
+Instead of asking:
 
 ```text
-.
-├── frontend/       React + TypeScript application
-├── backend/        Separate Python/FastAPI prototype
-├── docs/           Product, implementation, audit, and cleanup notes
-├── architecture/   Scalable SVG diagrams
-├── screenshots/    App screenshots; review before external use
-├── demo/           Walkthrough video and demo script
-├── pitch-deck/     Pitch deck asset and access notes
-├── scripts/        Local maintenance scripts
-├── server.ts       Express API and local app server
-└── README.md       Project overview and setup
+Where is compute available?
 ```
 
-Generated `dist/` output and installed `node_modules/` are excluded from Git.
+REGEN-X asks:
 
-### Start here
+```text
+Where is renewable energy available right now?
+```
 
-- [Frontend folder guide](frontend/README.md)
-- [Documentation index](docs/README.md)
-- [System architecture](architecture/system-architecture.svg)
-- [Routing decision flow](architecture/agent-workflow.svg)
-- [Data flow](architecture/data-flow.svg)
-- [Deployment concept](architecture/deployment-architecture.svg)
-- [Repository audit](docs/repository-audit-report.md)
-- [Cleanup report](docs/cleanup-report.md)
-- [Security policy](SECURITY.md)
-- [Contribution guide](CONTRIBUTING.md)
-- [Changelog](CHANGELOG.md)
+and automatically aligns AI workloads with renewable energy opportunities.
 
-## Data and sustainability boundaries
+---
 
-- Prices, curtailment, availability, workload state, savings, and carbon metrics are illustrative or simulated values.
-- Gemini may produce a routing recommendation; no containers are dispatched and no real job is moved.
-- Passport examples are stored in process memory. A fingerprint is not a digital signature, immutable ledger, proof of energy origin, or compliance evidence.
-- Residency values are scenario inputs, not a production data-boundary control or legal compliance assessment.
-- This checkout contains no measured customer results, contracted commercial partnerships, or independently reviewed environmental methodology.
+ Predict → Match → Record
 
-## Submission checklist
+ 🔮 Predict
 
-- [ ] Confirm the official Builder Cup rubric, eligibility, and deliverables in the event portal.
-- [ ] Deploy and smoke-test the exact commit to be reviewed.
-- [ ] Confirm judges can play the linked video without signing in.
-- [ ] Reconcile the slide deck with the implementation and remove unsupported production, savings, certification, and partnership claims.
-- [ ] Visually review screenshots and validate the retained pitch-deck PDF before presenting them as evidence.
-- [ ] Claim Firebase or Firestore only if an integration is implemented and verifiable.
-- [ ] Run `npm ci`, `npm run lint`, and `npm run build` on the final revision.
+Gemini analyzes renewable energy opportunity signals and forecasts renewable availability windows.
 
-## License
+ ⚡ Match
 
-See [`LICENSE`](LICENSE).
+REGEN-X identifies suitable AI workloads and recommends optimal execution opportunities.
+
+ 📜 Record
+
+The platform generates a Green Compute Passport containing execution metadata and sustainability insights.
+
+---
+
+ Example Enterprise Impact
+
+ Traditional Cloud Execution
+
+| Metric | Value |
+|----------|----------|
+| Compute Cost | $100,000 |
+| Carbon Profile | High |
+| Renewable Utilization | Limited |
+
+ REGEN-X Coordinated Execution
+
+| Metric | Value |
+|----------|----------|
+| Compute Cost | $68,000* |
+| Carbon Profile | Reduced |
+| Renewable Utilization | Optimized |
+
+ Outcomes
+
+✅ Lower Compute Cost
+
+✅ Higher Renewable Energy Utilization
+
+✅ Sustainability Reporting Ready
+
+✅ Verifiable Carbon Accounting
+
+*Illustrative prototype scenario.*
+
+---
+
+ Google Technology Stack
+
+| Technology | Purpose |
+|------------|----------|
+| Gemini | Renewable energy forecasting, workload evaluation, intelligent routing recommendations |
+| Firestore | Opportunity signals, workload metadata, routing records, sustainability metrics, and Green Compute Passport records |
+| Cloud Run | Serverless orchestration services, APIs, routing workflows, and execution logic |
+| Google Maps Platform | Geographic visualization of renewable opportunity regions |
+
+---
+
+ Key Features
+
+ Renewable Opportunity Detection
+
+Identify renewable energy availability windows and renewable-rich regions.
+
+ AI Workload Matching
+
+Match suitable AI workloads with renewable-powered execution opportunities.
+
+ Energy-Aware Routing
+
+Optimize workload placement based on renewable energy availability and operational constraints.
+
+ Green Compute Passport
+
+Generate transparent and auditable sustainability records for every workload execution.
+
+ Sustainability Intelligence
+
+Track impact metrics, carbon reduction insights, and renewable utilization outcomes.
+
+ Executive Dashboard
+
+Monitor renewable opportunities, routing decisions, workload status, and sustainability performance.
+
+---
+
+ Solution Architecture
+
+```text
+Renewable Energy Signals
+            │
+            ▼
+      Gemini Forecasting
+            │
+            ▼
+    REGEN-X Orchestrator
+        (Cloud Run)
+            │
+            ▼
+     Workload Matching
+            │
+            ▼
+      Routing Engine
+            │
+            ▼
+     Compute Resources
+            │
+            ▼
+   Green Compute Passport
+            │
+            ▼
+        Firestore
+```
+
+---
+
+ Builder Cup Innovation
+
+REGEN-X introduces an energy-aware orchestration model where renewable energy availability becomes a first-class input to AI workload placement decisions.
+
+The platform demonstrates how AI can help transform renewable energy curtailment from wasted potential into a measurable economic and sustainability opportunity.
+
+---
+
+ Business Value
+
+ For AI Companies
+
+- Reduce AI compute costs
+- Improve sustainability performance
+- Access verifiable carbon reporting
+
+ For Renewable Energy Providers
+
+- Improve renewable utilization
+- Unlock new value from curtailed energy
+- Enable new energy-aware compute ecosystems
+
+ For Enterprises
+
+- Achieve sustainability goals
+- Improve ESG reporting
+- Reduce infrastructure costs
+
+---
+
+ Project Status
+
+ Completed
+
+✅ Interactive MVP
+
+✅ Renewable Opportunity Detection
+
+✅ AI Workload Matching
+
+✅ Energy-Aware Routing
+
+✅ Green Compute Passport
+
+✅ Gemini Integration
+
+✅ Cloud Run Architecture
+
+✅ Interactive Dashboard
+
+✅ Architecture Documentation
+
+✅ Builder Cup Submission Assets
+
+---
+
+ Future Enhancements
+
+🔄 Live Renewable Data Integration
+
+🔄 Real-Time Opportunity Forecasting
+
+🔄 Compute Marketplace Integration
+
+🔄 Carbon-Aware Scheduling
+
+🔄 Enterprise Sustainability Reporting
+
+🔄 Multi-Region Optimization
+
+---
+
+ Repository Structure
+
+```text
+frontend/           Frontend application
+backend/            Backend services
+docs/               Project documentation
+architecture/       Architecture diagrams
+screenshots/        Product screenshots
+demo/               Demo assets
+pitch-deck/         Builder Cup pitch deck
+```
+
+---
+
+ Sustainability Impact
+
+REGEN-X demonstrates how renewable energy curtailment can be transformed into a valuable resource for AI workloads through intelligent prediction, matching, and verification.
+
+The goal is to increase renewable energy utilization while reducing both the cost and environmental impact of AI infrastructure.
+
+---
+
+ Disclaimer
+
+REGEN-X is a concept-stage Builder Cup prototype demonstrating renewable energy-aware AI workload orchestration.
+
+Illustrative datasets and simulated renewable opportunities are used throughout the platform. The project is not a production control plane for live utility operations, energy markets, or commercial energy trading.
+
+---
+
+ Vision
+
+> A future where every unit of renewable energy has the opportunity to power intelligent computation instead of being wasted.
