@@ -1,205 +1,145 @@
-﻿# REGEN-X: Spatial-Temporal Compute Arbitrage Network
+# REGEN-X
 
-REGEN-X is a local simulation and product demo for routing flexible AI workloads toward regions and time windows where renewable energy is available at low or negative cost. The project combines a React frontend with a Node.js + Express backend to model grid telemetry, curtailment events, workload allocation, and Green Compute Passport-style compliance records.
+## Turn Wasted Renewable Energy Into Low-Cost AI Compute
 
-This repository is intended for demo use, technical exploration, and presentation-friendly validation. It is not a production control plane for live energy markets or a real utility operations system.
+REGEN-X is a demonstration platform that routes delay-tolerant AI workloads to periods and regions with surplus renewable energy. It shows how enterprises can reduce compute cost and carbon footprint by matching flexible jobs to low- or negative-cost energy windows while preserving data residency and auditability.
 
-## Project overview
+---
 
-The current implementation demonstrates a simplified compute-arbitrage loop:
+## Live resources
 
-- simulated renewable corridors report energy prices, available capacity, and curtailment levels;
-- AI-assisted orchestration evaluates a target workload and decides whether to scale, throttle, or route it;
-- data residency constraints are represented as part of the routing decision flow;
-- generated passport records summarize carbon avoidance and execution context in an audit-style ledger.
+- Prototype: https://regen-x-xcdniufgbq-el.a.run.app/
+- Pitch deck: https://docs.google.com/presentation/d/19TZ0xXUcykzuHNxgdfya1qXANxzIlisC
+- Demo video: https://drive.google.com/file/d/1AdiDb6uE5SuBMA6bSJ41GQNNd6LJHyCF
 
-The repo is designed to make the concept concrete in a single local workflow without requiring a connected grid API or a full industrial deployment stack.
+---
 
-## Repository structure
+## The problem
 
-```text
-regen-x/
-├── README.md
-├── docs/
-│   ├── problem-statement.md
-│   ├── solution-overview.md
-│   ├── architecture.md
-│   ├── ai-agents.md
-│   ├── green-compute-passport.md
-│   └── roadmap.md
-├── architecture/
-│   ├── system-architecture.png
-│   ├── data-flow.png
-│   ├── agent-workflow.png
-│   └── deployment-architecture.png
-├── screenshots/
-│   ├── dashboard.png
-│   ├── surplus-detection.png
-│   ├── ai-routing.png
-│   ├── passport.png
-│   └── analytics.png
-├── demo/
-│   ├── demo-script.md
-│   └── walkthrough.pdf
-├── pitch-deck/
-│   └── Regen-X-AI-Builder-Cup.pdf
-├── src/
-│   ├── App.tsx
-│   ├── main.tsx
-│   ├── index.css
-│   ├── types.ts
-│   ├── components/
-│   ├── services/
-│   └── utils/
-├── backend/
-│   └── app/
-│       └── main.py
-├── server.ts
-├── public/
-├── .env.example
-├── .gitignore
-├── Dockerfile
-├── LICENSE
-├── CONTRIBUTING.md
-├── package.json
-├── package-lock.json
-├── tsconfig.json
-├── vite.config.ts
-├── metadata.json
-├── index.html
-├── RUNLOG.md
-└── dist/
-```
+Many AI workloads are flexible in time and location. Grid operators periodically curtail renewable generation when supply exceeds demand, creating short windows of very low or negative prices. Enterprises currently lack a practical, auditable way to take advantage of these windows for non-urgent compute work.
 
-## Codebase layout
+---
 
-### Frontend
-The frontend is a Vite React application written in TypeScript.
+## Why now
 
-Key areas include:
+- Increasing renewable penetration creates more frequent, predictable surplus windows.
+- Cloud and edge platforms provide the APIs and ephemeral capacity needed to schedule remote execution reliably.
+- Advances in model orchestration enable safe, policy-driven routing and audit trails without changing core application logic.
 
-- `src/App.tsx` — main dashboard composition and state orchestration
-- `src/components/` — dashboard, job, compliance, architecture, and verification views
-- `src/services/apiClient.ts` — typed API client for backend calls
-- `src/types.ts` — shared domain types for nodes, jobs, and passports
-- `src/utils/passportPdfExport.ts` — export flow for compliance/passport records
+---
 
-### Backend
-The main backend is implemented in `server.ts` and uses Express.
+## Predict → Match → Record (workflow)
 
-It exposes a set of demo endpoints, including:
+1. Predict: ingest grid telemetry and forecast short-term surplus and prices.
+2. Match: evaluate queued AI jobs against policy (delay tolerance, data residency, cost/CO2) and select execution windows and locations.
+3. Record: emit an auditable passport that records decision context, estimated carbon avoided, and execution metadata.
 
-- `GET /healthz` and `GET /readyz`
-- `GET /v1/grid/telemetry`
-- `POST /v1/simulation/override`
-- `GET /v1/jobs` and `POST /v1/jobs`
-- `GET /v1/compliance/passport`
-- `GET /v1/verification/checklist`
-- `POST /v1/orchestrate`
+---
 
-The repository also contains a Python prototype at `backend/app/main.py` using FastAPI and the Google GenAI SDK. This provides a secondary implementation of the orchestration flow and a useful reference for experimentation.
+## Example enterprise impact
 
-## Product concept
+- Reduce marginal compute spend on batch AI tasks by shifting them to surplus windows.
+- Improve sustainability reporting with per-job carbon estimates and signed audit records.
+- Maintain compliance through configurable data residency and verification checks.
 
-The core idea is that not every compute workload needs to run in a fixed always-on data center footprint. Some AI jobs are delay-tolerant, and some regions temporarily have excess renewable supply. In that setting, the platform demonstrates how to route compute toward available clean energy while accounting for policy, operational risk, and carbon accounting.
+---
 
-The current demo models this through:
+## Google technology stack
 
-- renewable corridor telemetry simulation;
-- curtailment and price sensitivity checks;
-- ROI and workload allocation views;
-- AI-driven routing decisions with a structured response body;
-- compliance-style passport ledger entries.
+REGEN-X uses Google Cloud building blocks for the prototype and integration examples:
 
-## Technology stack
+- Gemini (GenAI) — for orchestration reasoning and decision support
+- Firebase — lightweight auth and hosting for demos
+- Firestore — time-series and passport record store
+- Cloud Run — stateless backend and worker deployment
 
-- Frontend: React 19, TypeScript, Vite, Tailwind CSS v4
-- Data and UI libraries: D3, Motion, Lucide React
-- Backend runtime: Node.js, Express
-- AI orchestration: Google GenAI SDK (`@google/genai`)
-- PDF generation: `jspdf`, `jspdf-autotable`
-- Prototype backend: FastAPI, Pydantic, Google GenAI Python SDK
+---
 
-## Prerequisites
+## Key features
 
-The local setup assumes the following are available:
+- Surplus detection: simulated renewable corridor telemetry and price signals.
+- Policy-driven routing: configurable constraints for delay tolerance and data residency.
+- AI-assisted decisions: structured model outputs to score/rank routing options.
+- Audit-ready passports: per-job records for cost and carbon accounting.
+- Local-first demo: runnable locally without production grid integrations.
 
-- Node.js 18 or later
-- npm
-- A valid Gemini API key if you want the AI orchestrator path to use live Google GenAI calls
+---
 
-## Environment configuration
+## Architecture diagram
 
-Create a local environment file from the example:
+(See architecture/system-architecture.png)
+
+![Architecture](architecture/system-architecture.png)
+
+---
+
+## Screenshots
+
+Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+Surplus detection
+
+![Surplus detection](screenshots/surplus-detection.png)
+
+AI routing
+
+![AI routing](screenshots/ai-routing.png)
+
+Passport record
+
+![Passport](screenshots/passport.png)
+
+Analytics
+
+![Analytics](screenshots/analytics.png)
+
+---
+
+## Project status
+
+Prototype: interactive demo and local simulation. Not intended for production control of real-world energy systems. The code is suitable for evaluation, experimentation, and concept validation.
+
+---
+
+## Quick start
+
+1. Copy environment example:
 
 ```bash
 cp .env.example .env
 ```
 
-Then add the required variables to `.env`:
-
-```bash
-GEMINI_API_KEY="your_key_here"
-NODE_ENV="development"
-PORT=3000
-```
-
-## Installation
+2. Install and run locally:
 
 ```bash
 npm install
-```
-
-## Local development
-
-Run the app in development mode:
-
-```bash
 npm run dev
 ```
 
-The demo is served through the Express app and is typically available at:
+3. Open the demo at http://localhost:3000 or the prototype URL above.
 
-```text
-http://localhost:3000
-```
+Notes: a Gemini API key in .env enables live GenAI orchestration; otherwise the demo uses local simulation.
 
-## Production build
+---
 
-```bash
-npm run build
-npm start
-```
+## Repository structure (high level)
 
-## Available scripts
+- architecture/ — diagrams
+- backend/ — prototype Python API and server logic
+- src/ — TypeScript React frontend
+- screenshots/ — demo images
+- docs/ — problem statement, architecture, and roadmap
 
-The project exposes the following package scripts:
+---
 
-- `npm run dev` — run the app in development mode
-- `npm run build` — build the frontend bundle
-- `npm start` — serve the app in the production runtime path
-- `npm run lint` — TypeScript validation (`tsc --noEmit`)
-- `npm run generate:runlog` — refresh the runlog artifact used by the demo workflow
+## Sustainability impact
 
-## Documentation
+REGEN-X is focused on reducing marginal carbon from flexible workloads by shifting execution into periods of surplus renewable generation. The platform provides per-job estimates and an auditable trail suitable for sustainability reporting and internal verification.
 
-The project documentation is organized under `docs/` and covers the concept, architecture, and roadmap:
+---
 
-- `docs/problem-statement.md` — problem framing and motivation
-- `docs/solution-overview.md` — high-level platform concept
-- `docs/architecture.md` — implementation architecture and system flow
-- `docs/ai-agents.md` — simulated agent model and orchestration logic
-- `docs/green-compute-passport.md` — Green Compute Passport concept and compliance framing
-- `docs/roadmap.md` — near-term directions and future expansion areas
+## Disclaimer
 
-## Contributing
-
-Contributions are welcome when they are narrow, well-scoped, and clearly documented. For any substantive change, please update the related code and the matching documentation when necessary.
-
-## License
-
-The repository includes a license file for open use and distribution. Please review `LICENSE` before reusing or redistributing the project.
-
-## Notes on status
-
-This repository is best understood as a product demo and simulation layer rather than a production energy-operations platform. The code intentionally emphasizes experience, narrative clarity, and local reproducibility over real-world infrastructure complexity.
+This repository is a research and demonstration project. It is not a production-grade control system for energy markets or utility operations. Do not use this code to control live generation or make operational grid decisions without appropriate validation and coordination with grid operators.
